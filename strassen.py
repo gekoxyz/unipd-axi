@@ -2,16 +2,19 @@ import numpy as np
 
 np.random.seed(1337)
 
-MATRIX_SIZE = 64
+MATRIX_SIZE = 256
 
 def rec_matmul(A, B, C, n):
     # Base case
-    if n == 1:
-        return A[0][0] * B[0][0]
-        # for x in range(n):
-        #     for y in range(n):
-        #         for z in range(n):
-        #             C[x][y] += A[x][z] * B[z][y]
+    # if n == 1:
+        # return A[0][0] * B[0][0]
+    if n <= 8:
+        tmp = np.zeros((n,n)).astype(np.float32)
+        for x in range(n):
+            for y in range(n):
+                for z in range(n):
+                    tmp[x][y] += A[x][z] * B[z][y]
+        return tmp
     
     # Divide
     # partition A,B,C into n//2 x n//2 submatrices

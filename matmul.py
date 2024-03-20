@@ -1,7 +1,7 @@
 import numpy as np
 import time
 
-MATRIX_SIZE = 128
+MATRIX_SIZE = 512
 
 def classic_matmul(A,B):
     C = np.zeros((MATRIX_SIZE,MATRIX_SIZE))
@@ -28,9 +28,13 @@ def numpy_matmul(A,B):
 
 def rec_matmul_call(A, B, C, n):
     # Base case
-    if n == 1:
-        C[0][0] += A[0][0] * B[0][0]
-        return
+    if n <= 8:
+        tmp = np.zeros((n,n)).astype(np.float32)
+        for x in range(n):
+            for y in range(n):
+                for z in range(n):
+                    tmp[x][y] += A[x][z] * B[z][y]
+        return tmp 
     
     # Divide
     # partition A,B,C into n//2 x n//2 submatrices

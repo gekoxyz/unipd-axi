@@ -1,23 +1,38 @@
 import numpy as np
+import time
 
-# matrix = np.array([[1, 2, 3, 4],
-#                    [5, 6, 7, 8],
-#                    [9, 10, 11, 12],
-#                    [13, 14, 15, 16]])
-# print(matrix)
+MATRIX_SIZE = 512
 
-# rows, cols = matrix.shape
+def classic_matmul(A,B):
+    C = np.zeros((MATRIX_SIZE,MATRIX_SIZE))
 
-# print(matrix[:rows//2, :cols//2])
-# print(matrix[:rows//2, cols//2:])
-# print(matrix[rows//2:, :cols//2])
-# print(matrix[rows//2:, cols//2:])
+    start_classic = time.time()
+    for i in range(MATRIX_SIZE):
+        for j in range(MATRIX_SIZE):
+            for k in range(MATRIX_SIZE):
+                C[i][j] += A[i][k] * B[k][j]
+    end_classic = time.time()
 
+    print("classic time: " + str(end_classic - start_classic))
+    return C
 
+def inv_classic_matmul(A,B):
+    C = np.zeros((MATRIX_SIZE,MATRIX_SIZE))
 
-m1 = np.array([[1,2],[3,4]])
-m2 = np.array([[4,3],[2,1]])
+    start_classic = time.time()
+    for j in range(MATRIX_SIZE):
+        for i in range(MATRIX_SIZE):
+            for k in range(MATRIX_SIZE):
+                C[i][j] += A[i][k] * B[k][j]
+    end_classic = time.time()
 
-print(m1+m2)
+    print("invclassic time: " + str(end_classic - start_classic))
+    return C
 
-print(np.add(m1,m2))
+if __name__ == "__main__":
+    A = np.random.randn(MATRIX_SIZE, MATRIX_SIZE).astype(np.float32)
+    B = np.random.randn(MATRIX_SIZE, MATRIX_SIZE).astype(np.float32)
+    
+    classic_matmul(A, B)
+    inv_classic_matmul(A, B)
+    
