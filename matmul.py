@@ -1,7 +1,7 @@
 import numpy as np
 import time
 
-MATRIX_SIZE = 512
+MATRIX_SIZE = 256
 
 def classic_matmul(A,B):
     C = np.zeros((MATRIX_SIZE,MATRIX_SIZE))
