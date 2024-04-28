@@ -69,15 +69,15 @@ if __name__ == "__main__":
     x = np.array([0.0, 2.0, 1.0, 4.0])
     
     print("fft")
-    print(fft(x))
+    # print(fft(x))
     print(my_fft(x))
     print()
     print("ifft")
-    print(ifft(fft(x)))
+    # print(ifft(fft(x)))
     print(my_ifft(my_fft(x)))
     print()
     print("poly mul")
-    print(poly_mul(np.array([0,2,1,4]), np.array([1,4,3,2])))
+    # print(poly_mul(np.array([0,2,1,4]), np.array([1,4,3,2])))
     print(my_poly_mul(np.array([0,2,1,4]), np.array([1,4,3,2])))
 
 
