@@ -35,10 +35,10 @@ def lcs(X, Y):
                 l[i, j] = l[i, j - 1]
                 b[i, j] = "W"
 
-    print("ADDITIONAL COST TABLE")
-    print(l)
-    print("ADDITIONAL INFORMATION TABLE")
-    print(b)
+    print("Additional cost table:")
+    print(bcolors.OKBLUE + str(l) + bcolors.ENDC)
+    print("Additional information table:")
+    print(bcolors.OKBLUE + str(b) + bcolors.ENDC)
     return (l[m - 1, n - 1], b)
 
 
@@ -47,7 +47,7 @@ def print_lcs(X, b, i, j):
         return
     if b[i, j] == "NW":
         print_lcs(X, b, i - 1, j - 1)  # vai al carattere precedente prima della stampa
-        print(bcolors.OKGREEN + X[i - 1] + bcolors.ENDC)
+        print(bcolors.OKGREEN + X[i - 1] + bcolors.ENDC, end="")
     elif b[i, j] == "W":
         print_lcs(X, b, i, j - 1)
     else:
@@ -58,7 +58,13 @@ if __name__ == "__main__":
     # LCS: GTAB, with length 4
     S1 = "AGGTAB"
     S2 = "GXTXAYB"
-    print("calculating the LCS between " + S1 + " and " + S2)
-    llast, b = lcs(S1, S2)
-
+    print(
+        "calculating the LCS between "
+        + bcolors.OKGREEN + S1 + bcolors.ENDC
+        + " and "
+        + bcolors.OKGREEN + S2 + bcolors.ENDC
+    )
+    lcs_length, b = lcs(S1, S2)
+    print("the LCS has length " + str(lcs_length) + " and it's: ", end="")
     print_lcs(S1, b, len(S1), len(S2))
+    print()
